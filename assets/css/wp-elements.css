@@ -1,0 +1,343 @@
+/**
+ * WP Elements - Minimal Structural CSS
+ * 
+ * This provides only the essential layout and structure needed for fields
+ * to function properly. No colors, borders, or aesthetic styling included.
+ * 
+ * Enqueue this file if you want base functionality, then override as needed.
+ */
+
+/* ==========================================================================
+   Toggle Switch
+   ========================================================================== */
+
+.toggle-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.toggle__input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.toggle__slider {
+    position: absolute;
+    inset: 0;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: background-color 0.2s;
+}
+
+.toggle__slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.toggle__input:checked + .toggle__slider {
+    background-color: #2271b1;
+}
+
+.toggle__input:checked + .toggle__slider::before {
+    transform: translateX(20px);
+}
+
+.toggle__input:disabled + .toggle__slider {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.toggle__labels {
+    font-size: 12px;
+}
+
+.toggle__label-on,
+.toggle__label-off {
+    display: none;
+}
+
+.toggle__input:checked ~ .toggle__labels .toggle__label-on,
+.toggle__input:not(:checked) ~ .toggle__labels .toggle__label-off {
+    display: inline;
+}
+
+/* ==========================================================================
+   Button Group
+   ========================================================================== */
+
+.button-group {
+    display: inline-flex;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.button-group__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    margin: 0;
+    background: #f6f7f7;
+    border-right: 1px solid #8c8f94;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    user-select: none;
+}
+
+.button-group__item:last-child {
+    border-right: none;
+}
+
+.button-group__item:hover {
+    background: #f0f0f1;
+}
+
+.button-group__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.button-group__input:checked + .button-group__label,
+.button-group__item:has(.button-group__input:checked) {
+    background: #2271b1;
+    color: #fff;
+}
+
+.button-group__input:disabled + .button-group__label {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Fallback for browsers without :has() support */
+.button-group__item.is-selected {
+    background: #2271b1;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Range Slider
+   ========================================================================== */
+
+.range-field-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.range-field-wrapper input[type="range"] {
+    flex: 1;
+    max-width: 300px;
+}
+
+.range-output {
+    min-width: 50px;
+    text-align: center;
+    font-weight: 500;
+    padding: 4px 8px;
+    background: #f0f0f1;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   Checkbox & Radio Groups
+   ========================================================================== */
+
+.checkbox-group,
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
+.checkbox-group--vertical,
+.radio-group--vertical {
+    flex-direction: column;
+}
+
+.checkbox-group--horizontal,
+.radio-group--horizontal {
+    flex-direction: row;
+}
+
+.checkbox-item,
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.checkbox-item input,
+.radio-item input {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Date/Time Range
+   ========================================================================== */
+
+.range-picker {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.range-picker__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.range-picker__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #50575e;
+}
+
+.range-picker__separator {
+    padding-bottom: 6px;
+    color: #50575e;
+}
+
+/* ==========================================================================
+   Dimensions Field
+   ========================================================================== */
+
+.dimensions-field {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.dimensions__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dimensions__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #50575e;
+}
+
+.dimensions__separator {
+    padding-bottom: 6px;
+    color: #50575e;
+    font-weight: 600;
+}
+
+.dimensions__unit {
+    padding-bottom: 6px;
+    color: #50575e;
+}
+
+/* ==========================================================================
+   Amount + Type Field
+   ========================================================================== */
+
+.amount-type-field {
+    display: flex;
+    gap: 4px;
+}
+
+.amount-type-field input[type="number"] {
+    width: 100px;
+}
+
+.amount-type-field select {
+    width: auto;
+    min-width: 70px;
+}
+
+/* ==========================================================================
+   Link Field
+   ========================================================================== */
+
+.link-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.link-field__row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.link-field__row--checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.link-field__row--checkbox input {
+    margin: 0;
+}
+
+.link-field__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #50575e;
+}
+
+/* ==========================================================================
+   Price Field
+   ========================================================================== */
+
+.price-field {
+    display: flex;
+    gap: 4px;
+}
+
+.price-field__amount {
+    width: 100px;
+}
+
+.price-field__currency {
+    width: auto;
+    min-width: 90px;
+}
+
+/* ==========================================================================
+   Number + Unit Field
+   ========================================================================== */
+
+.number-unit-field {
+    display: flex;
+    gap: 4px;
+}
+
+.number-unit-field__value {
+    width: 80px;
+}
+
+.number-unit-field__unit {
+    width: auto;
+    min-width: 70px;
+}

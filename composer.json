@@ -1,7 +1,7 @@
 {
   "name": "arraypress/wp-elements",
   "version": "1.0.0",
-  "description": "Pure HTML form field and element generation for WordPress admin interfaces. No JavaScript, no CSS, just clean markup.",
+  "description": "Pure HTML form field and element generation for WordPress admin interfaces.",
   "homepage": "https://github.com/arraypress/wp-elements/",
   "type": "library",
   "license": "GPL-2.0-or-later",
@@ -12,19 +12,23 @@
     }
   ],
   "require": {
-    "php": ">=7.4"
+    "php": ">=7.4",
+    "arraypress/wp-composer-assets": "dev-main"
   },
   "autoload": {
     "psr-4": {
       "ArrayPress\\Elements\\": "src/"
-    }
+    },
+    "files": [
+      "src/Functions.php"
+    ]
   },
   "config": {
     "optimize-autoloader": true,
     "sort-packages": true,
     "preferred-install": "dist"
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "support": {
     "issues": "https://github.com/arraypress/wp-elements/issues",

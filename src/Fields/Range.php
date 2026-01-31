@@ -58,7 +58,8 @@ class Range extends Field {
 			'step'  => $this->options['step'],
 		] );
 
-		$html = '<div class="range-field-wrapper">';
+		$unit = esc_attr( $this->options['unit'] );
+		$html = '<div class="range-field-wrapper" data-unit="' . $unit . '">';
 		$html .= Element::create( 'input', $attrs )->render();
 
 		// Add output element if enabled

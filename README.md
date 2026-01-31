@@ -1,7 +1,6 @@
 # WordPress Elements
 
-Pure HTML form field generation for WordPress admin interfaces. No JavaScript, no CSS dependencies—just clean, properly
-escaped markup.
+Pure HTML form field generation for WordPress admin interfaces. No JavaScript, no CSS dependencies—just clean, properly escaped markup.
 
 ## Installation
 
@@ -366,19 +365,19 @@ Fields::number_unit( 'margin', $value, [
 
 All fields support these options:
 
-| Option        | Type   | Default | Description                          |
-|---------------|--------|---------|--------------------------------------|
-| `id`          | string | auto    | HTML id attribute (defaults to name) |
-| `label`       | string | null    | Field label text                     |
-| `description` | string | null    | Help text below field                |
-| `class`       | string | ''      | Additional CSS classes               |
-| `wrapper`     | bool   | true    | Wrap in div with label/description   |
-| `required`    | bool   | false   | Mark as required                     |
-| `disabled`    | bool   | false   | Disable the field                    |
-| `readonly`    | bool   | false   | Make read-only                       |
-| `placeholder` | string | null    | Placeholder text                     |
-| `data`        | array  | []      | Data attributes                      |
-| `attrs`       | array  | []      | Custom HTML attributes               |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `id` | string | auto | HTML id attribute (defaults to name) |
+| `label` | string | null | Field label text |
+| `description` | string | null | Help text below field |
+| `class` | string | '' | Additional CSS classes |
+| `wrapper` | bool | true | Wrap in div with label/description |
+| `required` | bool | false | Mark as required |
+| `disabled` | bool | false | Disable the field |
+| `readonly` | bool | false | Make read-only |
+| `placeholder` | string | null | Placeholder text |
+| `data` | array | [] | Data attributes |
+| `attrs` | array | [] | Custom HTML attributes |
 
 ## Data Attributes
 
@@ -483,6 +482,60 @@ echo Fields::my_custom( 'field_name', $value, [ 'label' => 'My Field' ] );
 
 - PHP 7.4 or higher
 - WordPress (for escaping functions: `esc_attr`, `esc_html`, `esc_textarea`)
+
+## Optional Assets
+
+The library includes minimal CSS and JS files for fields that need styling/interactivity to function properly. These are optional - enqueue them if you want base functionality out of the box.
+
+### Enqueue All Assets
+
+```php
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    // Only on your settings page
+    if ( $hook !== 'settings_page_my-plugin' ) {
+        return;
+    }
+    
+    // Enqueue both CSS and JS
+    wp_elements_enqueue_assets();
+} );
+```
+
+### Enqueue Individually
+
+```php
+// CSS only (structural styles for toggles, button groups, etc.)
+wp_elements_enqueue_styles();
+
+// JS only (button group selection, range slider output)
+wp_elements_enqueue_scripts();
+```
+
+### Register for Later
+
+```php
+// Register without enqueueing
+wp_elements_register_assets();
+
+// Later, enqueue when needed
+wp_enqueue_style( 'wp-elements' );
+wp_enqueue_script( 'wp-elements' );
+```
+
+### What the Assets Provide
+
+**CSS:**
+- Toggle switch structure (positioning, slider mechanics, checked state)
+- Button group layout (flexbox, hidden inputs, selection state)
+- Range slider output display
+- Checkbox/radio group layouts (vertical/horizontal)
+- Compound field layouts (dimensions, price, link, number_unit, etc.)
+
+**JavaScript:**
+- Button group `is-selected` class toggling
+- Range slider live output value updates
+
+The fields work without these assets, but complex fields like toggles and button groups need the CSS to display correctly.
 
 ## License
 
