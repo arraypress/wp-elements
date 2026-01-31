@@ -86,13 +86,14 @@
 
 .button-group {
     display: inline-flex;
+    flex-direction: row;
     border: 1px solid #8c8f94;
     border-radius: 3px;
     overflow: hidden;
 }
 
 .button-group__item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 6px 12px;
@@ -102,6 +103,8 @@
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s;
     user-select: none;
+    line-height: 1.4;
+    font-size: 13px;
 }
 
 .button-group__item:last-child {
@@ -113,18 +116,35 @@
 }
 
 .button-group__input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
-.button-group__input:checked + .button-group__label,
+.button-group__label {
+    display: inline;
+}
+
+/* Selected state - use .is-selected class (toggled by JS) */
+.button-group__item.is-selected {
+    background: #2271b1;
+    color: #fff;
+}
+
+/* Also support :has() for modern browsers without JS */
 .button-group__item:has(.button-group__input:checked) {
     background: #2271b1;
     color: #fff;
 }
 
-.button-group__input:disabled + .button-group__label {
+.button-group__item.is-disabled,
+.button-group__item:has(.button-group__input:disabled) {
     opacity: 0.5;
     cursor: not-allowed;
 }

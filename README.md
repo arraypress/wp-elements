@@ -485,57 +485,37 @@ echo Fields::my_custom( 'field_name', $value, [ 'label' => 'My Field' ] );
 
 ## Optional Assets
 
-The library includes minimal CSS and JS files for fields that need styling/interactivity to function properly. These are optional - enqueue them if you want base functionality out of the box.
-
-### Enqueue All Assets
+The library includes minimal CSS and JS for fields that need styling to function (toggles, button groups, etc.). Enqueue them if you want base functionality out of the box:
 
 ```php
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-    // Only on your settings page
     if ( $hook !== 'settings_page_my-plugin' ) {
         return;
     }
     
-    // Enqueue both CSS and JS
-    wp_elements_enqueue_assets();
+    wp_elements_enqueue();
 } );
 ```
 
-### Enqueue Individually
+**CSS provides:** Toggle switch styling, button group layout, range slider output, compound field layouts.
+
+**JavaScript provides:** Button group selection state, range slider live output updates.
+
+## Global Helper
+
+Render a field without importing the Fields class:
 
 ```php
-// CSS only (structural styles for toggles, button groups, etc.)
-wp_elements_enqueue_styles();
+echo wp_render_field( 'text', 'username', $value, [
+    'label' => 'Username',
+    'required' => true,
+] );
 
-// JS only (button group selection, range slider output)
-wp_elements_enqueue_scripts();
+echo wp_render_field( 'select', 'country', $value, [
+    'options' => [ 'us' => 'USA', 'uk' => 'UK' ],
+    'default' => 'us',
+] );
 ```
-
-### Register for Later
-
-```php
-// Register without enqueueing
-wp_elements_register_assets();
-
-// Later, enqueue when needed
-wp_enqueue_style( 'wp-elements' );
-wp_enqueue_script( 'wp-elements' );
-```
-
-### What the Assets Provide
-
-**CSS:**
-- Toggle switch structure (positioning, slider mechanics, checked state)
-- Button group layout (flexbox, hidden inputs, selection state)
-- Range slider output display
-- Checkbox/radio group layouts (vertical/horizontal)
-- Compound field layouts (dimensions, price, link, number_unit, etc.)
-
-**JavaScript:**
-- Button group `is-selected` class toggling
-- Range slider live output value updates
-
-The fields work without these assets, but complex fields like toggles and button groups need the CSS to display correctly.
 
 ## License
 
